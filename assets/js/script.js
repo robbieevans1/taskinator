@@ -1,10 +1,10 @@
 var taskIdCounter = 0;
 
-var formEL = document.querySelector("#task-form");
+var formEl = document.querySelector("#task-form");
 var tasksToDoEl = document.querySelector("#tasks-to-do");
 var tasksInProgressEl = document.querySelector("#tasks-in-progress");
 var tasksCompletedEl = document.querySelector("#tasks-completed");
-var pageContentEl = document.querySelector("page-content");
+var pageContentEl = document.querySelector("#page-content");
 
 var taskFormHandler = function(event) {
     event.preventDefault();
@@ -12,7 +12,7 @@ var taskFormHandler = function(event) {
     var taskTypeInput = document.querySelector("select[name='task-type']").value;
     
     // check if input values are empty strings
-    if (!taskNameInput || !taskTypeInput) {
+    if (taskNameInput === "" || taskTypeInput === "") {
         alert("You need to fill out the task form!");
         return false;
     }
@@ -65,7 +65,7 @@ var createTaskActions = function(taskId) {
     var editButtonEl = document.createElement("button");
     editButtonEl.textContent = "Edit";
     editButtonEl.className = "btn edit-btn";
-    editButtonEl.setAttribute = "data-task-id", taskId;
+    editButtonEl.setAttribute("data-task-id", taskId);
     actionContainerEl.appendChild(editButtonEl);
     // create delete button
     var deleteButtonEl = document.createElement("button");
@@ -76,8 +76,8 @@ var createTaskActions = function(taskId) {
     // create change status dropdown
     var statusSelectEl = document.createElement("select");
     statusSelectEl.className = "select-status";
-    statusSelectEl.setAttribute = ("name", "status-change");
-    statusSelectEl.setAttribute = ("data-task-id", taskId);
+    statusSelectEl.setAttribute("name", "status-change");
+    statusSelectEl.setAttribute("data-task-id", taskId);
     actionContainerEl.appendChild(statusSelectEl);
     // create status options
     var statusChoices = ["To Do", "In Progress", "Completed"];
@@ -177,7 +177,7 @@ var deleteTask = function(taskId) {
 };
 
 // Create a new task
-formEL.addEventListener("submit", taskFormHandler);
+formEl.addEventListener("submit", taskFormHandler);
 
 // for edit and delete buttons
 pageContentEl.addEventListener("click", taskButtonHandler);
